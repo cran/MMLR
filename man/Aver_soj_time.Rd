@@ -2,29 +2,28 @@
 % Please edit documentation in R/MMLR.R
 \name{Aver_soj_time}
 \alias{Aver_soj_time}
-\title{Calculating average sojourn time in each state}
+\title{Calculating the average sojourn time in each state}
 \usage{
 Aver_soj_time(ii, tau_observed, Q)
 }
 \arguments{
-\item{ii}{number (scalar), currently 1 or 2}
+\item{ii}{number (scalar)}
 
 \item{tau_observed}{number (scalar), observed time}
 
-\item{Q}{Matrix (m x m, currently m = 2, see Details}
+\item{Q}{Matrix (m x m), m - number of states}
 }
 \value{
 Vector of average sojourn times in each state.
 Vector components in total should give observation time (tau_observed).
 }
 \description{
-Calculating expectation of sojourn times in states (currently two states)
-for the observed time and for given initial state, using eigenvalues and eigenvectors.
+Calculating expectation of sojourn times in states for the observed time and for given initial state, using eigenvalues and eigenvectors.
 }
 \details{
-Calculating expectation of sojourn times in states 1 and 2 for the observed time (tau_observed) and if initial state is given (ii).
-Matrix Q is so-called Generator matrix: Q = lambda – Lambda, where lambda is matrix with transition rates from state s_i to state s_j,
-and Lambda is diagonal matrix with a vector (Lambda_1, …, Lambda_m) on the main diagonal, where m is a number of states of external environment (currently m = 2).
+Calculating expectation of sojourn times in states for the observed time (tau_observed) and if initial state is given (ii).
+Matrix Q is so-called Generator matrix:  \eqn{Q=\lambda-\Lambda, where \lambda} is matrix with known transition rates from state $s_{i}$ to state $s_{j}$,
+and \eqn{\Lambda} is diagonal matrix with a vector  \eqn{(\Lambda_{1},...,\Lambda_{m}} on the main diagonal, where m is a number of states of external environment.
 Eigenvalues and eigenvectors are used in calculations.
 }
 \examples{
@@ -34,5 +33,4 @@ ld <- as.matrix(rowSums(lambda))
 Lambda <- diag(as.vector(ld))
 Generator <- t(lambda) - Lambda
 Aver_soj_time(1,10,Generator)
-\donttest{Aver_soj_time(2,5,Generator)}
 }

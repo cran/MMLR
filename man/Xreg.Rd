@@ -7,16 +7,16 @@
 Xreg(tGiven, initState, X, lambda)
 }
 \arguments{
-\item{tGiven}{Vector n}
+\item{tGiven}{Vector of the observed times (n x 1), n – number of observations}
 
-\item{initState}{Vector n}
+\item{initState}{Vector of the initial states (n x 1), n – number of observations}
 
-\item{X}{Matrix (n x k+1), k – number of regressors (plus intercept)}
+\item{X}{Matrix of predictors (n x k), n - number of observations, k - number of columns (k - 1 - number of regressors).}
 
-\item{lambda}{Matrix (m x m), m – number of states}
+\item{lambda}{Matrix with the known transition rates \eqn{\lambda_{i,j}}, (m x m), m – number of states}
 }
 \value{
-Matrix (n x 2(k+1))
+Matrix (n x 2k)
 }
 \description{
 Regressors matrix formation taking into account observation times and initial states.
@@ -24,14 +24,13 @@ Kronecker product is used.
 }
 \details{
 Function calculates the following expression
-addImage(doc, "matrix.png")
+![](matrix.png "Fig.1"),
 where vector of average sojourn times in each state is calculated using function Aver_soj_time.
-\figure{matrix.png}{Fig.1}
 }
 \examples{
-X <- cbind(rep_len(1,10),c(2,5,7,3,1,1,2,2,3,6), c(5,9,1,2,3,2,3,5,2,2))
+Xtest <- cbind(rep_len(1,10),c(2,5,7,3,1,1,2,2,3,6), c(5,9,1,2,3,2,3,5,2,2))
 tGiven <- matrix (c(6,4.8,1,2.6,6.4,1.7,2.9,4.4,1.5,3.4), nrow = 10, ncol = 1)
 initState <- matrix (c(2,1,1,2,2,2,1,1,2,1),nrow = 10, ncol = 1)
 lambda <- matrix(c(0, 0.33, 0.45, 0), nrow = 2, ncol = 2, byrow = TRUE)
-Xreg(tGiven, initState, X, lambda)
+Xreg(tGiven, initState, Xtest, lambda)
 }
